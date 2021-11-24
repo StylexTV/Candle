@@ -1,5 +1,6 @@
 package de.stylextv.candle.tick;
 
+import de.stylextv.candle.asset.AssetManager;
 import de.stylextv.candle.render.RenderManager;
 
 public class TickManager {
@@ -21,6 +22,8 @@ public class TickManager {
 	
 	private static void onStop() {
 		RenderManager.stop();
+		
+		AssetManager.destroyAssets();
 	}
 	
 	private static void run() {
