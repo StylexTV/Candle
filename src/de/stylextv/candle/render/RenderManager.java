@@ -1,8 +1,16 @@
 package de.stylextv.candle.render;
 
+import java.util.List;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 
+import de.stylextv.candle.game.GameManager;
+import de.stylextv.candle.game.scene.Scene;
+import de.stylextv.candle.game.scene.object.SceneObject;
+import de.stylextv.candle.render.layer.RenderLayer;
+import de.stylextv.candle.render.resolution.RenderResolution;
+import de.stylextv.candle.render.target.RenderTarget;
 import de.stylextv.candle.window.Window;
 
 public class RenderManager {
@@ -22,7 +30,27 @@ public class RenderManager {
 	public static void run() {
 		GL.createCapabilities();
 		
-		// render
+		RenderResolution.HIGH.fitWindow(window);
+		
+		Scene scene = GameManager.getScene();
+		
+		// render lights
+		
+		RenderTarget.LEVEL.bind();
+		
+		for(RenderLayer l : RenderLayer.getLayers()) {
+			
+			// if at high resolution layer: apply effects to level render target, switch render target and draw level render target
+			
+			List<SceneObject> objects = scene.getObjectsOnLayer(l);
+			
+			for(SceneObject o : objects) {
+				
+				if(!o.shouldRender()) continue;
+				
+				// render object
+			}
+		}
 		
 		GLFW.glfwPollEvents();
 	}

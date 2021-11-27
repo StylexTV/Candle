@@ -1,8 +1,10 @@
 package de.stylextv.candle.render.layer;
 
+import de.stylextv.candle.render.resolution.RenderResolution;
+
 public class RenderLayer {
 	
-	public static final RenderLayer UI = new RenderLayer();
+	public static final RenderLayer UI = new RenderLayer(RenderResolution.HIGH);
 	
 	public static final RenderLayer GAMEPLAY = new RenderLayer();
 	public static final RenderLayer FOREGROUND_GAMEPLAY = new RenderLayer();
@@ -22,26 +24,50 @@ public class RenderLayer {
 	public static final RenderLayer LANDSCAPE3 = new RenderLayer();
 	
 	private static RenderLayer[] layers = new RenderLayer[] {
-			UI,
-			
-			FOREGROUND_PARTICLES,
-			FOREGROUND_SCENERY,
-			FOREGROUND_TILES,
-			
-			FOREGROUND_GAMEPLAY,
-			GAMEPLAY,
-			BACKGROUND_GAMEPLAY,
-			
-			BACKGROUND_SCENERY,
-			BACKGROUND_TILES,
-			BACKGROUND_PARTICLES,
-			
-			LANDSCAPE1,
+			LANDSCAPE3,
 			LANDSCAPE2,
-			LANDSCAPE3
+			LANDSCAPE1,
+			
+			BACKGROUND_PARTICLES,
+			BACKGROUND_TILES,
+			BACKGROUND_SCENERY,
+			
+			BACKGROUND_GAMEPLAY,
+			GAMEPLAY,
+			FOREGROUND_GAMEPLAY,
+			
+			FOREGROUND_TILES,
+			FOREGROUND_SCENERY,
+			FOREGROUND_PARTICLES,
+			
+			UI
 	};
 	
+	private RenderResolution resolution;
 	
+	public RenderLayer() {
+		this(RenderResolution.LOW);
+	}
+	
+	public RenderLayer(RenderResolution r) {
+		this.resolution = r;
+	}
+	
+	public float getRenderScale() {
+		return resolution.getRenderScale();
+	}
+	
+	public int getResolutionWidth() {
+		return resolution.getWidth();
+	}
+	
+	public int getResolutionHeight() {
+		return resolution.getHeight();
+	}
+	
+	public RenderResolution getResolution() {
+		return resolution;
+	}
 	
 	public static RenderLayer[] getLayers() {
 		return layers;

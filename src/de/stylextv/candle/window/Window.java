@@ -11,7 +11,7 @@ public class Window {
 	
 	private static final String TITLE = Constants.NAME;
 	
-	private static final boolean VSYNC = true;
+	private static final boolean VSYNC = false;
 	
 	private int width;
 	private int height;

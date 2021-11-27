@@ -4,11 +4,15 @@ import java.io.InputStream;
 
 public class Asset {
 	
-	private static final String ROOT_FOLDER = "assets/";
+	private static final String FOLDER = "assets/";
 	
 	private String path;
 	
 	private boolean created;
+	
+	public Asset() {
+		this(null);
+	}
 	
 	public Asset(String path) {
 		this.path = path;
@@ -17,6 +21,8 @@ public class Asset {
 	}
 	
 	public void create() {
+		if(created) destroy();
+		
 		AssetManager.addAsset(this);
 		
 		created = true;
@@ -29,11 +35,15 @@ public class Asset {
 	}
 	
 	public InputStream asStream() {
+		return asStream("");
+	}
+	
+	public InputStream asStream(String ending) {
 		Thread thread = Thread.currentThread();
 		
 		ClassLoader loader = thread.getContextClassLoader();
 		
-		return loader.getResourceAsStream(ROOT_FOLDER + path);
+		return loader.getResourceAsStream(FOLDER + path + ending);
 	}
 	
 	public String getPath() {
